@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Your Venue</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+            display: flex;
+            flex-direction: column; /* Stack header, container, and footer */
+            align-items: center; /* Center items horizontally */
+            min-height: 100vh; /* Ensure body takes at least the full viewport height */
+            box-sizing: border-box; /* Include padding and border in element's total width and height */
+        }
+
+        /* Header styles (consistent with the main page) */
+        header {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%; /* Make header full width */
+            box-sizing: border-box; /* Include padding and border in width */
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .highlight {
+            color: #9500be;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+        }
+        nav ul li a:hover{
+            color: #7e00a0;
+        }
+        .buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .register {
+            background-color: #fff;
+            border: 2px solid #9500be;
+            color: #9500be;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .register:hover {
+            background-color: #9500be;
+            color: #ffffff;
+        }
+
+        .login {
+            background-color: #ffffff;
+            border: 2px solid #9500be;
+            color: #9500be;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .login:hover {
+            background-color: #9500be;
+            color: #ffffff;
+        }
+
+        .signup {
+            background-color: #9500be;
+            border: 2px solid #9500be;
+            color: #ffffff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .signup:hover{
+            background-color: #750095ed;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 50px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            margin-top: 20px; /* Add some space below the header */
+            margin-bottom: 20px; /* Add some space above the footer */
+        }
+
+        .icon1 {
+            font-size: 60px;
+            color: #9500be;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin: 0 0 10px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+            margin: 0 0 30px;
+        }
+
+        .button {
+            display: inline-block;
+            background-color: #9500be;
+            color: white;
+            padding: 15px 30px;
+            font-size: 16px;
+            text-decoration: none;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s, box-shadow 0.3s;
+        }
+
+        .button:hover {
+            background-color: #7a00a3;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .footer {
+            background-color: #1a202c;
+            color: #e2e8f0;
+            padding: 40px 20px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: auto; /* Push footer to the bottom */
+        }
+
+        .footer-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .footer-section {
+            flex: 1 1 calc(25% - 20px);
+            min-width: 200px;
+        }
+
+        .footer-logo {
+            font-size: 24px;
+            color: #ffffff;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo span {
+            color: #ffa500;
+        }
+
+        .footer-section h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .footer-section p {
+            font-size: 14px;
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-section ul li a {
+            text-decoration: none;
+            color: #e2e8f0;
+            font-size: 14px;
+        }
+
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+            color: rgb(255, 166, 0);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .social-icons a {
+            color: #e2e8f0;
+            font-size: 17px;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            color: #ffa500;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 20px;
+            border-top: 1px solid #2d3748;
+            padding-top: 10px;
+            font-size: 14px;
+        }
+
+        .footer-bottom p {
+            margin: 0;
+            color: #718096;
+        }
+
+        .footer-section p i {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="#FFD700"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke="#800080"></line>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke="#800080"></line>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke="#4A148C"></line>
+                </svg>
+            </div>
+            <div class="text">
+                <span class="highlight">BookVenueNow</span>
+            </div>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="pra.html">Home</a></li>
+                <li><a href="#">Venues</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="buttons">
+            <a href="#" class="register">
+                <i class="fa fa-user-plus"></i> Register Your Venue
+            </a>
+            <a href="login.html" class="login">Login</a>
+            <a href="signup.html" class="signup">Sign Up</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="icon1">
+            <i class="fas fa-sign-in-alt"></i>
+        </div>
+        <h1>Please Log In to Register Your Venue</h1>
+        <p>To list your function hall or event space on our platform, please log in to your existing account or create a new one.</p>
+        <a href="login.html" class="button">Login or Sign Up</a>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h2 class="footer-logo">BookVenueNow</h2>
+                <p>Find the perfect function hall for your special events. Easy booking, real-time availability, and premium services.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Browse Venues</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Customer Support</h3>
+                <ul>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Payment Options</a></li>
+                    <li><a href="#">Refund Policy</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Hyderabad, Telangana, India - 500001</p>
+                <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+                <p><i class="fas fa-envelope"></i> info@bookvenuenow.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 BookVenueNow. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

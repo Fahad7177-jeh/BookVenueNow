@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BookVenueNow - Login & Register</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header styles */
+        header {
+            background-color: #ffffff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+        }
+
+        .text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .highlight {
+            color: #9500be;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #000;
+            font-weight: 500;
+        }
+        nav ul li a:hover{
+            color: #7e00a0;
+        }
+        .buttons a {
+            margin-left: 15px;
+            padding: 8px 15px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 5px;
+        }
+
+        .register {
+            background-color: #fff;
+            border: 2px solid #9500be;
+            color: #9500be;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .register:hover {
+            background-color: #9500be;
+            color: #ffffff;
+        }
+
+        .login {
+            background-color: #ffffff;
+            border: 2px solid #9500be;
+            color: #9500be;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .login:hover {
+            background-color: #9500be;
+            color: #ffffff;
+        }
+
+        .signup {
+            background-color: #9500be;
+            border: 2px solid #9500be;
+            color: #ffffff;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .signup:hover{
+            background-color: #750095ed;
+        }
+
+       
+        h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .main-content {
+            display: flex;
+            
+        }
+        
+        .auth-section {
+            width: 50%;
+            background: white;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .auth-section h1{
+            font-size: 30px;
+        }
+        .auth-section p{
+            font-size:17px ;           
+        }
+        .auth-tabs {
+            display: flex;
+            margin-bottom: 10px;
+            border-radius: 8px 8px 0 0;
+            overflow: hidden;
+            background-color: #ebebeb;
+            border-radius: 10px;
+        }
+
+        .auth-tab {
+            padding: 15px 30px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #7f8c8d;
+            transition: all 0.3s ease;
+            text-align: center;
+            flex: 1;
+            border: none;
+            background: transparent;
+            font-size: 16px;
+        }
+
+        .auth-tab.active {
+            color: #7c24a8;
+            background-color: #f1f5f9;
+        }
+
+        .auth-tab:not(.active):hover {
+            color: #7c24a8;
+            background-color: #f5f5f5;
+        }
+
+        .auth-forms-container {
+            background: white;
+            padding: 30px;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+
+        }
+
+        .auth-form {
+            display: none;
+            margin-bottom: 10px;
+        }
+
+        .auth-form.active {
+            display: block;
+            
+        }
+        label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"],
+        input[type="tel"] {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border 0.3s;
+            margin-bottom: 10px;
+        }
+
+        input:focus {
+            border-color: #7c24a8;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(124, 36, 168, 0.2);
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .remember-me {
+            display: flex;
+            align-items: center;
+        }
+
+        .remember-me input {
+            margin-right: 8px;
+        }
+
+        .forgot-password {
+            color: #7c24a8;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 14px;
+            background-color: #7c24a8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            background-color: #6a1f8f;
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .auth-switch a {
+            color: #7c24a8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+
+        /* Features Section */
+        .features-section {
+            height:155vh;
+            width: 50%;
+            background-color: #7c24a8;
+            padding-left:35px;
+            color: white;
+            align-items: flex-start;
+            padding-top: 22%;
+        }
+
+        .features-section h2 {
+            font-size: 28px;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .features-section p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .features-list {
+            list-style-type: none;
+        }
+
+        .features-list li {
+            position: relative;
+            padding-left: 30px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .features-list li:before {
+            content: "✓";
+            color: #27ae60;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #666;
+            border-top: 1px solid #eee;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .auth-section, .features-section {
+                max-width: 100%;
+            }
+            
+            .features-section {
+                margin-top: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <div class="icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="#FFD700"></rect>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke="#800080"></line>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke="#800080"></line>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke="#4A148C"></line>
+                </svg>
+            </div>
+            <div class="text">
+                <span class="highlight">BookVenueNow</span>
+            </div>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="pra.html">Home</a></li>
+                <li><a href="#">Venues</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </nav>
+
+        <div class="buttons">
+            <a href="#" class="register">
+                <i class="fa fa-user-plus"></i> Register Your Venue
+            </a>
+            <a href="login.html" class="login">Login</a>
+            <a href="signup.html" class="signup">Sign Up</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="main-content">
+            <section class="auth-section">
+                <h1>Welcome to BookVenueNow</h1>
+                <p class="subtitle">Book your perfect function hall with ease</p>
+                <div class="auth-tabs">
+                    <button class="auth-tab" data-tab="login">Login</button>
+                    <button class="auth-tab active" data-tab="register">Register</button>
+                </div>
+
+                <div class="auth-forms-container">
+                    <!-- Login Form -->
+                    <form class="auth-form" id="loginForm">
+                        <h2>Login to your account</h2>
+                        <p style="color: #666;">Enter your credentials below to access your account.</p>
+                        <div class="form-group">
+                            <label for="username">Email</label>
+                            <input type="text" id="username" placeholder="Enter your email id" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" placeholder="Enter your password" required>
+                        </div>
+
+                        <div class="remember-forgot">
+                            <div class="remember-me">
+                                <input type="checkbox" id="remember">
+                                <label for="remember">Remember me</label>
+                            </div>
+                            <a href="#" class="forgot-password">Forgot password?</a>
+                        </div>
+
+                        <a href="Untitled-1.html"><button type="submit" class="btn">Login</button></a>
+
+                        <div class="auth-switch">
+                            Don't have an account? <a href="#" data-tab="register">Sign up</a>
+                        </div>
+                    </form>
+                    
+                    <!-- Registration Form -->
+                    <form class="auth-form active" id="registerForm">
+                        <h2>Create a new account</h2>
+                        <p style="color: #666; margin-bottom: 20px;">Fill in your details to create your account</p>
+
+                        <div class="form-group">
+                            <label for="reg-username">Username</label>
+                            <input type="text" id="reg-username" placeholder="Choose a username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-fullname">Full Name</label>
+                            <input type="text" id="reg-fullname" placeholder="Enter your full name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-email">Email</label>
+                            <input type="email" id="reg-email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-phone">Phone (Optional)</label>
+                            <input type="tel" id="reg-phone" placeholder="Enter your phone number">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="reg-password">Password</label>
+                            <input type="password" id="reg-password" placeholder="Create a password" required>
+                        </div>
+
+                        <button type="submit" class="btn">Create Account</button>
+
+                        <div class="auth-switch">
+                            Already have an account? <a href="#" data-tab="login">Login</a>
+                        </div>
+                    </form>
+                </div>
+            </section>
+
+            <section class="features-section">
+                <h2>Discover Perfect Venues for Your Special Events</h2>
+                <p>Join BookVenueNow to access exclusive function halls, real-time availability checking, and premium services for your events.</p>
+
+                <ul class="features-list">
+                    <li>Easy booking process</li>
+                    <li>Verified venues with detailed information</li>
+                    <li>Additional services like decoration and catering</li>
+                    <li>Secure online payments</li>
+                    <li>24/7 customer support</li>
+                    <li>User reviews and ratings </li>
+                    <li>Special discounts for members</li>
+                </ul>
+            </section>
+        </div>
+
+        <footer>
+            <p>&copy; 2023 BookVenueNow. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.0/firebase-firestore-compat.js"></script>
+
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+    // Tab switching functionality
+    const authTabs = document.querySelectorAll('.auth-tab');
+    const authForms = document.querySelectorAll('.auth-form');
+    
+    authTabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const tabId = this.getAttribute('data-tab');
+            
+            // Update active tab
+            authTabs.forEach(t => t.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Show corresponding form
+            authForms.forEach(form => {
+                form.classList.remove('active');
+                if (form.id === `${tabId}Form`) {
+                    form.classList.add('active');
+                }
+            });
+        });
+    });
+    
+    // Switch forms via links
+    document.querySelectorAll('[data-tab]').forEach(link => {
+        if (link.tagName === 'A') {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tabId = this.getAttribute('data-tab');
+                
+                // Find and click the corresponding tab
+                document.querySelector(`.auth-tab[data-tab="${tabId}"]`).click();
+            });
+        }
+    });
+
+    // Validation utility functions
+    const validation = {
+        isValidEmail: function(email) {
+            const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return re.test(email);
+        },
+
+        isValidPassword: function(password) {
+            // At least 8 characters, 1 uppercase, 1 lowercase, 1 number
+            return password.length >= 8 && /[A-Z]/.test(password) && 
+                   /[a-z]/.test(password) && /\d/.test(password);
+        },
+
+        isValidUsername: function(username) {
+            // 3-20 chars, alphanumeric with allowed special chars (_, -, .)
+            const re = /^[a-zA-Z0-9_.-]{3,20}$/;
+            return re.test(username);
+        },
+
+        isValidName: function(name) {
+            // 2-50 chars, letters and spaces only
+            const re = /^[a-zA-Z\s]{2,50}$/;
+            return re.test(name);
+        },
+
+        isValidPhone: function(phone) {
+            // Optional, but if provided must be valid (10-15 digits)
+            if (!phone) return true;
+            const re = /^[0-9]{10,15}$/;
+            return re.test(phone);
+        },
+
+        showError: function(input, message) {
+            const formGroup = input.closest('.form-group');
+            let errorElement = formGroup.querySelector('.error-message');
+            
+            if (!errorElement) {
+                errorElement = document.createElement('div');
+                errorElement.className = 'error-message';
+                errorElement.style.color = 'red';
+                errorElement.style.fontSize = '0.8rem';
+                errorElement.style.marginTop = '-8px';
+                errorElement.style.marginBottom = '10px';
+                formGroup.appendChild(errorElement);
+            }
+            
+            errorElement.textContent = message;
+            input.style.borderColor = 'red';
+        },
+
+        clearError: function(input) {
+            const formGroup = input.closest('.form-group');
+            const errorElement = formGroup.querySelector('.error-message');
+            
+            if (errorElement) {
+                errorElement.remove();
+            }
+            
+            input.style.borderColor = '#ddd';
+        },
+
+        validateField: function(input, type) {
+            const value = input.value.trim();
+            
+            if (!value) {
+                this.showError(input, 'This field is required');
+                return false;
+            }
+            
+            let isValid = true;
+            let errorMessage = '';
+            
+            switch(type) {
+                case 'email':
+                    if (!this.isValidEmail(value)) {
+                        errorMessage = 'Please enter a valid email address';
+                        isValid = false;
+                    }
+                    break;
+                    
+                case 'password':
+                    if (value.length < 8) {
+                        errorMessage = 'Password must be at least 8 characters';
+                        isValid = false;
+                    } else if (!this.isValidPassword(value)) {
+                        errorMessage = 'Password must contain uppercase, lowercase, and number';
+                        isValid = false;
+                    }
+                    break;
+                    
+                case 'username':
+                    if (!this.isValidUsername(value)) {
+                        errorMessage = 'Username must be 3-20 chars (letters, numbers, _-.)';
+                        isValid = false;
+                    }
+                    break;
+                    
+                case 'name':
+                    if (!this.isValidName(value)) {
+                        errorMessage = 'Name must be 2-50 letters and spaces only';
+                        isValid = false;
+                    }
+                    break;
+                    
+                case 'phone':
+                    if (value && !this.isValidPhone(value)) {
+                        errorMessage = 'Phone must be 10-15 digits';
+                        isValid = false;
+                    }
+                    break;
+            }
+            
+            if (!isValid) {
+                this.showError(input, errorMessage);
+            } else {
+                this.clearError(input);
+            }
+            
+            return isValid;
+        }
+    };
+
+    // Setup real-time validation for all fields
+    document.getElementById('username').addEventListener('blur', function() {
+        validation.validateField(this, 'email');
+    });
+
+    document.getElementById('password').addEventListener('blur', function() {
+        validation.validateField(this, 'password');
+    });
+
+    document.getElementById('reg-username').addEventListener('blur', function() {
+        validation.validateField(this, 'username');
+    });
+
+    document.getElementById('reg-fullname').addEventListener('blur', function() {
+        validation.validateField(this, 'name');
+    });
+
+    document.getElementById('reg-email').addEventListener('blur', function() {
+        validation.validateField(this, 'email');
+    });
+
+    document.getElementById('reg-phone').addEventListener('blur', function() {
+        validation.validateField(this, 'phone');
+    });
+
+    document.getElementById('reg-password').addEventListener('blur', function() {
+        validation.validateField(this, 'password');
+    });
+
+    // Password strength indicator
+    document.getElementById('reg-password').addEventListener('input', function() {
+        const password = this.value;
+        let strengthIndicator = this.nextElementSibling;
+        
+        if (!strengthIndicator || !strengthIndicator.classList.contains('strength-indicator')) {
+            strengthIndicator = document.createElement('div');
+            strengthIndicator.className = 'strength-indicator';
+            strengthIndicator.style.marginTop = '5px';
+            strengthIndicator.style.fontSize = '0.8rem';
+            this.parentNode.insertBefore(strengthIndicator, this.nextSibling);
+        }
+        
+        if (password.length === 0) {
+            strengthIndicator.textContent = '';
+            return;
+        }
+        
+        const strength = {
+            0: { text: 'Very Weak', color: 'red' },
+            1: { text: 'Weak', color: 'orange' },
+            2: { text: 'Medium', color: '#ffcc00' },
+            3: { text: 'Strong', color: 'green' },
+            4: { text: 'Very Strong', color: 'darkgreen' }
+        };
+        
+        let score = 0;
+        if (password.length >= 8) score++;
+        if (/[A-Z]/.test(password)) score++;
+        if (/[a-z]/.test(password)) score++;
+        if (/\d/.test(password)) score++;
+        if (/[^A-Za-z0-9]/.test(password)) score++;
+        
+        // Cap at 4 for our strength levels
+        score = Math.min(score, 4);
+        
+        strengthIndicator.textContent = `Strength: ${strength[score].text}`;
+        strengthIndicator.style.color = strength[score].color;
+    });
+
+    // Login Form submission
+    const loginForm = document.getElementById('loginForm');
+    loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const emailInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        
+        // Validate all fields
+        const isEmailValid = validation.validateField(emailInput, 'email');
+        const isPasswordValid = validation.validateField(passwordInput, 'password');
+        
+        if (!isEmailValid || !isPasswordValid) {
+            return;
+        }
+        
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+        
+        try {
+            // Special handling for admin login
+            if (email === 'admin' && password === 'admin123') {
+                alert('Admin login successful! Redirecting to main page...');
+                // window.location.href = '/admin';
+                return;
+            }
+            
+            // Regular user login with Firebase
+            await auth.signInWithEmailAndPassword(email, password);
+            alert('Login successful! Redirecting...');
+            window.location.href = 'Untitled-1.html';
+        } catch (error) {
+            let errorMessage = 'Login error: ';
+            
+            if (error.code === 'auth/user-not-found') {
+                errorMessage += 'No account found with this email';
+            } else if (error.code === 'auth/wrong-password') {
+                errorMessage += 'Incorrect password';
+            } else if (error.code === 'auth/too-many-requests') {
+                errorMessage += 'Too many attempts. Account temporarily locked.';
+            } else {
+                errorMessage += error.message;
+            }
+            
+            alert(errorMessage);
+        }
+    });
+    
+    // Registration Form submission
+    const registerForm = document.getElementById('registerForm');
+    registerForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const usernameInput = document.getElementById('reg-username');
+        const fullNameInput = document.getElementById('reg-fullname');
+        const emailInput = document.getElementById('reg-email');
+        const phoneInput = document.getElementById('reg-phone');
+        const passwordInput = document.getElementById('reg-password');
+        
+        // Validate all fields
+        const isUsernameValid = validation.validateField(usernameInput, 'username');
+        const isNameValid = validation.validateField(fullNameInput, 'name');
+        const isEmailValid = validation.validateField(emailInput, 'email');
+        const isPhoneValid = validation.validateField(phoneInput, 'phone');
+        const isPasswordValid = validation.validateField(passwordInput, 'password');
+        
+        if (!isUsernameValid || !isNameValid || !isEmailValid || 
+            !isPhoneValid || !isPasswordValid) {
+            return;
+        }
+        
+        const username = usernameInput.value.trim();
+        const fullName = fullNameInput.value.trim();
+        const email = emailInput.value.trim();
+        const phone = phoneInput.value.trim();
+        const password = passwordInput.value.trim();
+        
+        try {
+            // 1. Create user account in Firebase Auth
+            const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+            
+            // 2. Save additional user data to Firestore
+            await db.collection('users').doc(userCredential.user.uid).set({
+                username: username,
+                fullName: fullName,
+                email: email,
+                phone: phone || null,
+                createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            
+            alert('Registration successful! You can now login.');
+            document.querySelector('.auth-tab[data-tab="login"]').click();
+            
+            // Clear form
+            registerForm.reset();
+        } catch (error) {
+            let errorMessage = 'Registration failed: ';
+            
+            // Handle specific Firebase errors
+            if (error.code === 'auth/email-already-in-use') {
+                errorMessage += 'This email is already registered. Please login instead.';
+            } else if (error.code === 'auth/weak-password') {
+                errorMessage += 'Password is too weak. Please choose a stronger password.';
+            } else if (error.code === 'auth/invalid-email') {
+                errorMessage += 'The email address is invalid.';
+            } else {
+                errorMessage += error.message;
+            }
+            
+            alert(errorMessage);
+        }
+    });
+    
+    // Forgot password link
+    const forgotPasswordLink = document.querySelector('.forgot-password');
+    forgotPasswordLink.addEventListener('click', async function(e) {
+        e.preventDefault();
+        const emailInput = document.getElementById('username');
+        const email = emailInput.value.trim();
+        
+        if (!email) {
+            validation.showError(emailInput, 'Please enter your email first');
+            return;
+        }
+        
+        if (!validation.isValidEmail(email)) {
+            validation.showError(emailInput, 'Please enter a valid email address');
+            return;
+        }
+        
+        try {
+            await auth.sendPasswordResetEmail(email);
+            alert('Password reset email sent! Check your inbox.');
+        } catch (error) {
+            alert('Error sending reset email: ' + error.message);
+        }
+    });
+});
+
+ // Your Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyA9IQojTGZ0szJ9MxrVjxHKe9aDiZmoAQY",
+            authDomain: "bookvenuenow-8efe3.firebaseapp.com",
+            projectId: "bookvenuenow-8efe3",
+            storageBucket: "bookvenuenow-8efe3.appspot.com",
+            messagingSenderId: "1090844556120",
+            appId: "1:1090844556120:web:ce54e81275b991a216432d"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab switching functionality
+            const authTabs = document.querySelectorAll('.auth-tab');
+            const authForms = document.querySelectorAll('.auth-form');
+            
+            authTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    
+                    // Update active tab
+                    authTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding form
+                    authForms.forEach(form => {
+                        form.classList.remove('active');
+                        if (form.id === `${tabId}Form`) {
+                            form.classList.add('active');
+                        }
+                    });
+                });
+            });
+            
+            // Switch forms via links
+            document.querySelectorAll('[data-tab]').forEach(link => {
+                if (link.tagName === 'A') {
+                    link.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const tabId = this.getAttribute('data-tab');
+                        
+                        // Find and click the corresponding tab
+                        document.querySelector(`.auth-tab[data-tab="${tabId}"]`).click();
+                    });
+                }
+            });
+
+            // Login Form submission
+            const loginForm = document.getElementById('loginForm');
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('username').value;
+                const password = document.getElementById('password').value;
+                
+                try {
+                    // Special handling for admin login
+                    if (email === 'admin' && password === 'admin123') {
+                        alert('Admin login successful! Redirecting to admin dashboard...');
+                        // window.location.href = '/admin';
+                        return;
+                    }
+                    
+                    // Regular user login with Firebase
+                    await auth.signInWithEmailAndPassword(email, password);
+                    alert('Login successful! Redirecting...');
+                    window.location.href = 'dashboard.html';
+                } catch (error) {
+                    alert('Login error: ' + error.message);
+                }
+            });
+            
+            // Registration Form submission
+            const registerForm = document.getElementById('registerForm');
+            registerForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('reg-email').value;
+                const password = document.getElementById('reg-password').value;
+                const username = document.getElementById('reg-username').value;
+                const fullName = document.getElementById('reg-fullname').value;
+                const phone = document.getElementById('reg-phone').value;
+                
+                try {
+                    // 1. Create user account in Firebase Auth
+                    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+                    
+                    // 2. Save additional user data to Firestore
+                    await db.collection('users').doc(userCredential.user.uid).set({
+                        username: username,
+                        fullName: fullName,
+                        email: email,
+                        phone: phone,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    
+                    alert('Registration successful! You can now login.');
+                    document.querySelector('.auth-tab[data-tab="login"]').click();
+                    
+                    // Clear form
+                    registerForm.reset();
+                } catch (error) {
+                    alert('Registration failed: ' + error.message);
+                }
+            });
+            
+            // Forgot password link
+            const forgotPasswordLink = document.querySelector('.forgot-password');
+            forgotPasswordLink.addEventListener('click', async function(e) {
+                e.preventDefault();
+                const email = document.getElementById('username').value;
+                
+                if (!email) {
+                    alert('Please enter your email first');
+                    return;
+                }
+                
+                try {
+                    await auth.sendPasswordResetEmail(email);
+                    alert('Password reset email sent! Check your inbox.');
+                } catch (error) {
+                    alert('Error sending reset email: ' + error.message);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

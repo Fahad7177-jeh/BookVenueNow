@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Royal Palace Function Hall</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+         /* Header styles */
+    header {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .text {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .highlight {
+      color: #9500be;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+    }
+    nav ul li a:hover{
+      color: #7e00a0;
+    }
+    .buttons a {
+      margin-left: 15px;
+      padding: 8px 15px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .register {
+      background-color: #fff;
+      border: 2px solid #9500be;
+      color: #9500be;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .register:hover {
+      background-color: #9500be;
+      color: #ffffff;
+    }
+
+    .login {
+      background-color: #ffffff;
+      border: 2px solid #9500be;
+      color: #9500be;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .login:hover {
+      background-color: #9500be;
+      color: #ffffff;
+    }
+
+    .signup {
+      background-color: #9500be;
+      border: 2px solid #9500be;
+      color: #ffffff;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .signup:hover{
+      background-color: #750095ed;
+    }
+        .main-image {
+            
+            width: 65vw;
+            height: 300px;
+            background-image: url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            
+            border-radius: 10px;
+        }
+        .img1{
+            width: 24vw;
+            height: 120px;
+            background-image: url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        .container {
+            margin: 20px;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.311);
+        }
+        .title {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+        .title h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+        .title .price-section {
+            text-align: right;
+            width: 270px;
+            height: 150px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.311);
+        }
+        .price-section h2 {
+            margin: 0;
+            font-size: 22px;
+            color: #6f42c1;
+        }
+        .price-section .btn {
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+            padding: 10px;
+            background-color: #6f42c1;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+         .tab-container {
+            display: flex;
+            justify-content: start;
+            align-items: center;
+            background-color: #f1f5f9;
+            padding: 10px 20px;
+            border-radius: 5px;
+            margin: 20px;
+        }
+        .tab {
+            padding: 10px 20px;
+            margin-right: 10px;
+            border-radius: 5px;
+            background-color: #ffffff;
+            font-size: 16px;
+            color: #495057;
+            text-decoration: none;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .tab:hover {
+            background-color: #e9ecef;
+        }
+        .tab.active {
+            background-color: #ffffff;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+        }
+        .tags {
+            display: flex;
+            
+        }
+        .tag {
+            padding: 5px 10px;
+            background-color: #e9ecef;
+            border-radius: 3px;
+            font-size: 14px;
+        }
+        .overview, .rules {
+            margin-top: 20px;
+        }
+        .overview h3, .rules h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        ul li {
+            margin: 5px 0;
+        }
+        .rules ul li {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .rules ul li::before {
+            content: '✔';
+            margin-right: 8px;
+            color: green;
+        }
+        .rules ul li.unchecked::before {
+            content: '✖';
+            color: red;
+        }
+        .amenities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Adjusted minmax for more columns */
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.amenity-card {
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease;
+}
+.amenity-card:hover {
+    transform: translateY(-3px);
+}
+
+.amenity-icon {
+    width: 24px; /* Larger icon */
+    height: 24px;
+    margin-right: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #6f42c1; /* Purple icon color */
+    font-size: 20px; /* Font Awesome icon size */
+}
+
+.amenity-text {
+    font-size: 16px;
+    font-weight: 500;
+    color: #495057;
+}
+
+/* Responsive adjustment for amenities-grid */
+@media (max-width: 1024px) {
+    .amenities-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+}
+
+
+        
+  .footer {
+    background-color: #1a202c;
+    color: #e2e8f0;
+    padding: 40px 20px;
+  }
+
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-section {
+    flex: 1 1 calc(25% - 20px);
+    min-width: 200px;
+  }
+
+  .footer-logo {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .footer-logo span {
+    color: #ffa500;
+  }
+
+  .footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .footer-section p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-section ul li {
+    margin-bottom: 8px;
+  }
+
+  .footer-section ul li a {
+    text-decoration: none;
+    color: #e2e8f0;
+    font-size: 14px;
+  }
+
+  .footer-section ul li a:hover {
+    text-decoration: underline;
+    color: rgb(255, 166, 0);
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .social-icons a {
+    color: #e2e8f0;
+    font-size: 17px;
+    text-decoration: none;
+  }
+
+  .social-icons a:hover {
+    color: #ffa500;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #2d3748;
+    padding-top: 10px;
+    font-size: 14px;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    color: #718096;
+  }
+
+  .footer-section p i {
+    margin-right: 8px;
+  }
+  
+    </style>
+</head>
+<body>
+    <!-- Header -->
+  <header>
+    <div class="logo">
+      <div class="icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="#FFD700"></rect>
+          <line x1="16" y1="2" x2="16" y2="6" stroke="#800080"></line>
+          <line x1="8" y1="2" x2="8" y2="6" stroke="#800080"></line>
+          <line x1="3" y1="10" x2="21" y2="10" stroke="#4A148C"></line>
+        </svg>
+      </div>
+      <div class="text">
+        <span class="highlight">BookVenueNow</span>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="pra.html">Home</a></li>
+        <li><a href="#">Venues</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="buttons">
+      <a href="Registerwithlogin.html" class="register">
+        <i class="fa fa-user-plus"></i> Register Your Venue
+      </a>
+      <a href="login.html" class="login">Login</a>
+      <a href="signup.html" class="signup">Sign Up</a>
+    </div>
+  </header>
+  <div class="container">
+  <div style="display: flex;">
+    <div class="main-image"></div>
+    <div class="img1" style="margin-left: 30px;">
+        <p style="margin: 190px; font-size: 20px; color: #9500be; font-weight: bold;">+2</p>
+    </div>
+</div>
+    
+    
+        <div class="title">
+            <div>
+                <h1>Royal Palace Function Hall</h1>
+                <p>0.0 (0 reviews) - Hyderabad</p>
+            </div>
+            <div class="price-section" style=" padding: 10px; background-color: #4d515837;">
+                <p style="display: inline; font-size: 20px; color: #7e00a0; font-weight: bold;">₹50,000 / </p>
+                <p style="display: inline; color: #7e00a0; margin-right: 150px;">day</p>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="green" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-calendar inline-block mr-1 h-4 w-4" data-replit-metadata="client/src/pages/venue-page.tsx:171:18" data-component-name="Calendar"><path d="M8 2v4"></path><path d="M16 2v4"></path><rect width="18" height="18" x="3" y="4" rx="2"></rect><path d="M3 10h18"></path></svg>
+                <p style="display: inline; margin-right: 85px; color:green;">Available For Booking</p>
+                <a href="checkAvalability.html" class="btn">Check Availability</a>
+                <a href="#" class="btn">Contact Host</a>
+            </div>
+        </div>
+        <div class="tags">
+            <span class="tag">Up to 435 guests</span>
+            <span class="tag">AC</span>
+            <span class="tag">Parking</span>
+            <span class="tag">Dance Floor</span>
+            <span class="tag">Projector</span>
+            <span class="tag">Catering</span>
+        </div>
+        <div class="tab-container">
+        <a href="#overview" class="tab active" onclick="toggleTab('overview')">Overview</a>
+        <a href="#amenities" class="tab" onclick="toggleTab('amenities')">Amenities</a>
+        <a href="#reviews" class="tab">Reviews</a>
+        <a href="#location" class="tab">Location</a>
+    </div>
+        <div class="overview" id="overview">
+            <h3>About this venue</h3>
+            <p>Luxurious venue perfect for weddings and grand celebrations with elegant decor and world-class amenities.</p>
+        
+        <div style="display: flex; gap:120px;margin-left: 30px;" >
+        <div class="rules">
+            <h3>Event Types</h3>
+            <ul>
+                <li>Weddings & Receptions</li>
+                <li>Engagement Ceremonies</li>
+                <li>Corporate Events & Seminars</li>
+                <li>Birthday Parties & Anniversaries</li>
+                <li>Product Launches</li>
+            </ul>
+            </div>
+            <div class="rules">
+            <h3>House Rules</h3>
+            <ul>
+                <li>Events can run until 11:00 PM</li>
+                <li>Outside catering allowed with permission</li>
+                <li>Decoration setup 4 hours before event</li>
+                <li class="unchecked">No smoking inside the hall</li>
+                <li class="unchecked">Loud music after 10:00 PM not allowed</li>
+            </ul>
+        </div>
+        </div>
+        </div>
+         <div class="container" id="amenities" style="display: none;">
+        <h3>Venue Amenities</h3>
+         <div class="amenities-grid">
+            <div class="amenity-card">
+                <div class="amenity-icon"></div>
+                <div class="amenity-text">Dance Floor</div>
+            </div>
+            <div class="amenity-card">
+                <div class="amenity-icon"></div>
+                <div class="amenity-text">Dressing Room</div>
+            </div>
+            <div class="amenity-card">
+                <div class="amenity-icon"></div>
+                <div class="amenity-text">Parking</div>
+            </div>
+            <div class="amenity-card">
+                <div class="amenity-icon"></div>
+                <div class="amenity-text">Stage</div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h2 class="footer-logo">BookVenueNow</h2>
+        <p>Find the perfect function hall for your special events. Easy booking, real-time availability, and premium services.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Browse Venues</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Customer Support</h3>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Payment Options</a></li>
+          <li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Hyderabad, Telangana, India - 500001</p>
+        <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+        <p><i class="fas fa-envelope"></i> info@bookvenuenow.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 BookVenueNow. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+        function toggleTab(tabName) {
+            // Get all sections
+            const overviewSection = document.getElementById('overview');
+            const amenitiesSection = document.getElementById('amenities');
+
+            // Get all tabs
+            const tabs = document.querySelectorAll('.tab');
+
+            // Reset tabs and sections
+            tabs.forEach(tab => tab.classList.remove('active'));
+            overviewSection.style.display = 'none';
+            amenitiesSection.style.display = 'none';
+
+            // Show selected section and set active tab
+            if (tabName === 'overview') {
+                overviewSection.style.display = 'block';
+                document.querySelector('.tab[data-tab="overview"]').classList.add('active');
+            } else if (tabName === 'amenities') {
+                amenitiesSection.style.display = 'block';
+                document.querySelector('.tab[data-tab="amenities"]').classList.add('active');
+            }
+        }
+
+        // Initialize
+        window.onload = function () {
+            toggleTab('overview');
+        }
+    </script>
+</body>
+
+</html>

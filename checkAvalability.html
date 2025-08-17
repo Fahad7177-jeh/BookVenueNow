@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Royal Palace Function Hall</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif; /* Using Inter font */
+            background-color: #fff; /* Light grey background */
+        }
+        /* Header styles */
+    header {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .text {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .highlight {
+      color: #9500be;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+    }
+    nav ul li a:hover{
+      color: #7e00a0;
+    }
+    .buttons a {
+      margin-left: 15px;
+      padding: 8px 15px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .register {
+      background-color: #fff;
+      border: 2px solid #9500be;
+      color: #9500be;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .register:hover {
+      background-color: #9500be;
+      color: #ffffff;
+    }
+
+    .login {
+      background-color: #ffffff;
+      border: 2px solid #9500be;
+      color: #9500be;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .login:hover {
+      background-color: #9500be;
+      color: #ffffff;
+    }
+
+    .signup {
+      background-color: #9500be;
+      border: 2px solid #9500be;
+      color: #ffffff;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .signup:hover{
+      background-color: #750095ed;
+    }
+        .booking-container {
+            display: flex;
+            justify-content: flex-start;
+            background-color: #ffffff;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            overflow: hidden; /* Ensures rounded corners are respected */
+            width: 100%;
+            margin-bottom: 20px;
+            flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        }
+
+        /* Left Panel: Availability & Calendar */
+        .availability-panel {
+            flex: 2; /* Takes more space */
+            padding: 30px;
+            box-sizing: border-box;
+            border-right: 1px solid #f0f0f0; /* Subtle separator */
+            min-width: 350px; /* Minimum width for calendar */
+        }
+
+        .availability-panel h2 {
+            font-size: 24px;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .calendar-header .month-year {
+            font-size: 18px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .calendar-header .nav-arrows button {
+            background: none;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 16px;
+            cursor: pointer;
+            color: #777;
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .calendar-header .nav-arrows button:hover {
+            background-color: #f5f5f5;
+            border-color: #ccc;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            text-align: center;
+        }
+
+        .calendar-grid .day-name {
+            font-size: 14px;
+            font-weight: 500;
+            color: #888;
+            padding: 10px 0;
+        }
+
+        .calendar-grid .date-cell {
+            padding: 12px 0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+            cursor: pointer;
+            transition: background-color 0.2s ease, color 0.2s ease;
+        }
+
+        .date-cell.empty {
+            background-color: transparent;
+            cursor: default;
+            color: #ccc;
+        }
+        .date-cell.past-date {
+    background-color: #f2f2f2; /* Grey background */
+    color: #ccc; /* Light grey text */
+    cursor: not-allowed; /* Indicate it's not selectable */
+}
+.date-cell.past-date:hover {
+    background-color: #f2f2f2 !important; /* Prevent hover effect */
+}
+        .date-cell.available {
+            background-color: #e6ffe6; /* Light green */
+            color: #28a745; /* Dark green */
+        }
+        .date-cell.available:hover {
+            background-color: #d4ffd4;
+        }
+
+        .date-cell.booked {
+            background-color: #ffe6e6; /* Light red */
+            color: #dc3545; /* Dark red */
+            cursor: not-allowed;
+        }
+
+        .date-cell.pending {
+            background-color: #fff8e6; /* Light yellow */
+            color: #ffc107; /* Dark yellow */
+        }
+        .date-cell.pending:hover {
+            background-color: #fff0cc;
+        }
+
+        .date-cell.selected {
+            background-color: #6f42c1; /* Purple */
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 2px 8px rgba(111, 66, 193, 0.3);
+        }
+
+        .calendar-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 4px;
+        }
+        .legend-color.available { background-color: #e6ffe6; border: 1px solid #28a745; }
+        .legend-color.booked { background-color: #ffe6e6; border: 1px solid #dc3545; }
+        .legend-color.pending { background-color: #fff8e6; border: 1px solid #ffc107; }
+
+        .selected-date-info {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            font-size: 16px;
+            color: #555;
+            text-align: center;
+        }
+        .selected-date-info strong {
+            color: #333;
+            font-weight: 600;
+        }
+
+        .time-slot-selection {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .time-slot-button {
+            padding: 10px 15px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background-color: white;
+            color: #555;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+        }
+        .time-slot-button:hover {
+            background-color: #f5f5f5;
+            border-color: #ccc;
+        }
+        .time-slot-button.selected {
+            background-color: #6f42c1;
+            color: white;
+            border-color: #6f42c1;
+        }
+
+        .event-details {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+        .event-details h3 {
+            font-size: 18px;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 5px;
+        }
+        .form-group select,
+        .form-group input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            color: #333;
+            box-sizing: border-box;
+        }
+        .form-group .note {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+        }
+
+        /* Right Panel: Booking Summary */
+        .summary-panel {
+            flex: 1;
+            padding: 30px;
+            background-color: #f9f9f9;
+            border-left: 1px solid #f0f0f0;
+            box-sizing: border-box;
+            min-width: 300px;
+        }
+
+        .summary-panel h3 {
+            font-size: 20px;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .venue-summary-card {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .venue-summary-card img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .venue-summary-info h4 {
+            margin: 0;
+            font-size: 18px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .venue-summary-info p {
+            margin: 5px 0 0 0;
+            font-size: 14px;
+            color: #777;
+        }
+
+        .booking-details-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 25px;
+            border: 6px solid #eee;
+            padding-bottom: 15px;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-details-list li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #555;
+        }
+        .booking-details-list li strong {
+            color: #333;
+            font-weight: 500;
+        }
+        .booking-details-list li span {
+            color: #777;
+        }
+
+        .additional-services {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .additional-services h4 {
+            font-size: 16px;
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .additional-services label {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #555;
+            cursor: pointer;
+        }
+        .additional-services label input[type="checkbox"] {
+            margin-right: 10px;
+            transform: scale(1.1);
+            accent-color: #6f42c1;
+        }
+        .additional-services label span.price {
+            font-weight: 600;
+            color: #6f42c1;
+        }
+
+        .cost-breakdown {
+            margin-bottom: 30px;
+        }
+        .cost-breakdown li {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 15px;
+            color: #555;
+        }
+        .cost-breakdown li strong {
+            color: #333;
+            font-weight: 500;
+        }
+        .cost-breakdown li span {
+            font-weight: 600;
+            color: #333;
+        }
+        .cost-breakdown .total-row {
+            font-size: 18px;
+            font-weight: bold;
+            color: #6f42c1;
+            border-top: 1px dashed #ddd;
+            padding-top: 15px;
+            margin-top: 15px;
+        }
+
+        .proceed-button {
+            width: 100%;
+            padding: 15px;
+            background-color: #6f42c1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            box-shadow: 0 4px 12px rgba(111, 66, 193, 0.3);
+        }
+        .proceed-button:hover {
+            background-color: #5a4dbf;
+            transform: translateY(-2px);
+        }
+
+        .terms-text {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            margin-top: 15px;
+        }
+        .terms-text a {
+            color: #6f42c1;
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .booking-container {
+                flex-direction: column;
+                border-radius: 8px;
+            }
+            .availability-panel, .summary-panel {
+                border-right: none;
+                border-left: none;
+                padding: 20px;
+                width: 100%;
+                min-width: unset;
+            }
+            .availability-panel {
+                border-bottom: 1px solid #f0f0f0;
+            }
+            .summary-panel h3 {
+                text-align: left;
+            }
+            .venue-summary-card {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: left;
+            }
+            .venue-summary-card img {
+                margin-bottom: 10px;
+            }
+            .calendar-legend {
+                flex-wrap: wrap;
+                justify-content: flex-start;
+            }
+            .time-slot-selection {
+                justify-content: flex-start;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .availability-panel h2 {
+                font-size: 20px;
+            }
+            .calendar-header .month-year {
+                font-size: 16px;
+            }
+            .calendar-header .nav-arrows button {
+                padding: 6px 10px;
+                font-size: 14px;
+            }
+            .date-cell {
+                padding: 10px 0;
+                font-size: 14px;
+            }
+            .summary-panel h3 {
+                font-size: 18px;
+            }
+            .proceed-button {
+                font-size: 16px;
+                padding: 12px;
+            }
+        }
+        
+  .footer {
+    background-color: #1a202c;
+    color: #e2e8f0;
+    padding: 40px 20px;
+  }
+
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-section {
+    flex: 1 1 calc(25% - 20px);
+    min-width: 200px;
+  }
+
+  .footer-logo {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .footer-logo span {
+    color: #ffa500;
+  }
+
+  .footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .footer-section p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-section ul li {
+    margin-bottom: 8px;
+  }
+
+  .footer-section ul li a {
+    text-decoration: none;
+    color: #e2e8f0;
+    font-size: 14px;
+  }
+
+  .footer-section ul li a:hover {
+    text-decoration: underline;
+    color: rgb(255, 166, 0);
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .social-icons a {
+    color: #e2e8f0;
+    font-size: 17px;
+    text-decoration: none;
+  }
+
+  .social-icons a:hover {
+    color: #ffa500;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #2d3748;
+    padding-top: 10px;
+    font-size: 14px;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    color: #718096;
+  }
+
+  .footer-section p i {
+    margin-right: 8px;
+  }
+    </style>
+</head>
+<body>
+     <header>
+    <div class="logo">
+      <div class="icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="#FFD700"></rect>
+          <line x1="16" y1="2" x2="16" y2="6" stroke="#800080"></line>
+          <line x1="8" y1="2" x2="8" y2="6" stroke="#800080"></line>
+          <line x1="3" y1="10" x2="21" y2="10" stroke="#4A148C"></line>
+        </svg>
+      </div>
+      <div class="text">
+        <span class="highlight">BookVenueNow</span>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="pra.html">Home</a></li>
+        <li><a href="#">Venues</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="buttons">
+      <a href="Registerwithlogin.html" class="register">
+        <i class="fa fa-user-plus"></i> Register Your Venue
+      </a>
+      
+      <a href="login.html" class="login">Login</a>
+      <a href="signup.html" class="signup">Sign Up</a>
+    </div>
+  </header>
+  <h2 style="margin-left: 20px;">Book Royal Palace Function Hall</h2>
+  <p style="margin-left: 20px;">Complete your booking details below to secure your venue.</p>
+    <div class="booking-container">
+        <div class="availability-panel">
+            <h2>Check Availability & Book</h2>
+
+            <div class="calendar-header">
+                <div class="month-year" id="currentMonthYear">May 2025</div>
+                <div class="nav-arrows">
+                    <button id="prevMonth">&lt;</button>
+                    <button id="nextMonth">&gt;</button>
+                </div>
+            </div>
+
+            <div class="calendar-grid" id="calendarGrid">
+                <div class="day-name">Sun</div>
+                <div class="day-name">Mon</div>
+                <div class="day-name">Tue</div>
+                <div class="day-name">Wed</div>
+                <div class="day-name">Thu</div>
+                <div class="day-name">Fri</div>
+                <div class="day-name">Sat</div>
+
+                <div class="date-cell empty">28</div>
+                <div class="date-cell empty">29</div>
+                <div class="date-cell empty">30</div>
+                <div class="date-cell empty">1</div>
+                <div class="date-cell empty">2</div>
+                <div class="date-cell empty">3</div>
+                <div class="date-cell available">4</div>
+                <div class="date-cell available">5</div>
+                <div class="date-cell available">6</div>
+                <div class="date-cell available">7</div>
+                <div class="date-cell available">8</div>
+                <div class="date-cell available">9</div>
+                <div class="date-cell available">10</div>
+                <div class="date-cell available">11</div>
+                <div class="date-cell available">12</div>
+                <div class="date-cell available">13</div>
+                <div class="date-cell available">14</div>
+                <div class="date-cell available">15</div>
+                <div class="date-cell booked">16</div>
+                <div class="date-cell booked">17</div>
+                <div class="date-cell available">18</div>
+                <div class="date-cell available">19</div>
+                <div class="date-cell available">20</div>
+                <div class="date-cell pending">21</div>
+                <div class="date-cell pending">22</div>
+                <div class="date-cell pending">23</div>
+                <div class="date-cell available">24</div>
+                <div class="date-cell available">25</div>
+                <div class="date-cell available">26</div>
+                <div class="date-cell available">27</div>
+                <div class="date-cell available" data-date="2025-05-28">28</div>
+                <div class="date-cell available" data-date="2025-05-29">29</div>
+                <div class="date-cell available" data-date="2025-05-30">30</div>
+                <div class="date-cell available selected" data-date="2025-05-31">31</div> </div>
+
+            <div class="calendar-legend">
+                <div class="legend-item">
+                    <div class="legend-color available"></div> Available
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color booked"></div> Booked
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color pending"></div> Pending
+                </div>
+            </div>
+
+            <div class="selected-date-info">
+                Selected Date: <strong id="displaySelectedDate">May 31, 2025</strong>
+            </div>
+
+            <div class="time-slot-section">
+                <h3>Select Time Slot</h3>
+                <div class="time-slot-selection">
+                    <button class="time-slot-button" data-time="Morning (8AM-12PM)">Morning (8AM-12PM)</button>
+                    <button class="time-slot-button selected" data-time="Afternoon (12PM-4PM)">Afternoon (12PM-4PM)</button>
+                    <button class="time-slot-button" data-time="Evening (4PM-8PM)">Evening (4PM-8PM)</button>
+                    <button class="time-slot-button" data-time="Night (8PM-12AM)">Night (8PM-12AM)</button>
+                </div>
+            </div>
+
+            <div class="event-details">
+                <h3>Event Details</h3>
+                <div class="form-group">
+                    <label for="eventTypeSelect">Event Type:</label>
+                    <select id="eventTypeSelect">
+                        <option value="">Select event type</option>
+                        <option value="Wedding">Wedding</option>
+                        <option value="Birthday Party">Birthday Party</option>
+                        <option value="Corporate Event">Corporate Event</option>
+                        <option value="Anniversary">Anniversary</option>
+                        <option value="Engagement">Engagement</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="numGuestsInput">Number of Guests:</label>
+                    <input type="number" id="numGuestsInput" value="100" min="1">
+                </div>
+                <div class="form-group">
+                    <label for="cateringPlatesInput">Catering (Number of plates):</label>
+                    <input type="number" id="cateringPlatesInput" value="150" min="0">
+                    <div class="note">Leave as 0 if no catering required</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="summary-panel">
+            <h3>Booking Summary</h3>
+
+            <div class="venue-summary-card">
+                <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Royal Palace Function Hall">
+                <div class="venue-summary-info">
+                    <h4>Royal Palace Function Hall</h4>
+                    <p>Hyderabad</p>
+                </div>
+            </div>
+
+            <ul class="booking-details-list">
+                <li><strong>Date:</strong> <span id="summaryDate">May 31, 2025</span></li>
+                <li><strong>Time:</strong> <span id="summaryTime">Afternoon (12PM-4PM)</span></li>
+                <li><strong>Event Type:</strong> <span id="summaryEventType">Not selected</span></li>
+                <li><strong>Guests:</strong> <span id="summaryGuests">100</span></li>
+                <li><strong>Catering Plates:</strong> <span id="summaryCateringPlates">150</span></li>
+            </ul>
+
+            <div class="additional-services">
+                <h4>Additional Services</h4>
+                <label>
+                    <input type="checkbox" data-service-price="15000" id="serviceDecoration"> Decoration
+                    <span class="price">₹15,000</span>
+                </label>
+                <label>
+                    <input type="checkbox" data-service-price="25000" id="servicePhotography"> Photography & Videography
+                    <span class="price">₹25,000</span>
+                </label>
+                <label>
+                    <input type="checkbox" data-service-price="8000" id="serviceDJ"> DJ & Sound System
+                    <span class="price">₹8,000</span>
+                </label>
+                <label>
+                    <input type="checkbox" data-service-price="12000" id="serviceFloral"> Floral Arrangement
+                    <span class="price">₹12,000</span>
+                </label>
+                <label>
+                    <input type="checkbox" data-service-price="20000" id="serviceLiveBand"> Live Band Performance
+                    <span class="price">₹20,000</span>
+                </label>
+                <label>
+                    <input type="checkbox" data-service-price="5000" id="serviceWeddingCake"> Wedding Cake Design
+                    <span class="price">₹5,000</span>
+                </label>
+                <label>
+                    <input type="checkbox" data-service-price="10000" id="serviceLighting"> Lighting Setup
+                    <span class="price">₹10,000</span>
+                </label>
+            </div>
+
+            <ul class="cost-breakdown">
+                <li><strong>Venue Charges:</strong> <span id="venueCharges">₹50,000</span></li>
+                <li><strong>Catering Charges:</strong> <span id="cateringCharges">₹75,000</span></li>
+                <li><strong>Additional Services:</strong> <span id="calculatedAdditionalServices">₹0</span></li>
+                <li><strong>GST (18%):</strong> <span id="calculatedGST">₹0</span></li>
+                <li class="total-row"><strong>Total:</strong> <span id="finalTotal">₹0</span></li>
+            </ul>
+
+            <a href="payment.html"><button class="proceed-button">Proceed to Payment</button></a>
+            <p class="terms-text">By proceeding, you agree to our <a href="#">Terms & Conditions</a></p>
+        </div>
+    </div>
+<footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h2 class="footer-logo">BookVenueNow</h2>
+        <p>Find the perfect function hall for your special events. Easy booking, real-time availability, and premium services.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Browse Venues</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Customer Support</h3>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Payment Options</a></li>
+          <li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Hyderabad, Telangana, India - 500001</p>
+        <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+        <p><i class="fas fa-envelope"></i> info@bookvenuenow.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 BookVenueNow. All rights reserved.</p>
+    </div>
+  </footer>
+    <script>
+       document.addEventListener('DOMContentLoaded', function() {
+    const calendarGrid = document.getElementById('calendarGrid');
+    const currentMonthYear = document.getElementById('currentMonthYear');
+    const prevMonthBtn = document.getElementById('prevMonth');
+    const nextMonthBtn = document.getElementById('nextMonth');
+    const displaySelectedDate = document.getElementById('displaySelectedDate');
+    const summaryDate = document.getElementById('summaryDate');
+    const summaryTime = document.getElementById('summaryTime');
+    const summaryEventType = document.getElementById('summaryEventType');
+    const summaryGuests = document.getElementById('summaryGuests');
+    const summaryCateringPlates = document.getElementById('summaryCateringPlates');
+
+    const timeSlotButtons = document.querySelectorAll('.time-slot-button');
+    const eventTypeSelect = document.getElementById('eventTypeSelect');
+    const numGuestsInput = document.getElementById('numGuestsInput');
+    const cateringPlatesInput = document.getElementById('cateringPlatesInput');
+
+    const venueChargesSpan = document.getElementById('venueCharges');
+    const cateringChargesSpan = document.getElementById('cateringCharges');
+    const calculatedAdditionalServicesSpan = document.getElementById('calculatedAdditionalServices');
+    const calculatedGSTSpan = document.getElementById('calculatedGST');
+    const finalTotalSpan = document.getElementById('finalTotal');
+
+    const serviceCheckboxes = document.querySelectorAll('.additional-services input[type="checkbox"]');
+
+    const VENUE_BASE_CHARGE = 50000;
+    const CATERING_PER_PLATE_PRICE = 500;
+    const GST_RATE = 0.18;
+
+    let currentDate = new Date(); // Current date for calendar navigation
+    let selectedBookingDate = null; // Stores the selected date object
+    let selectedBookingTime = null; // Stores the selected time string
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); // Reset time for accurate comparison
+
+    // Initialize input values from the image
+    numGuestsInput.value = 100;
+    cateringPlatesInput.value = 150; // Set to 150 as per image
+
+    let numberOfGuests = parseInt(numGuestsInput.value);
+    let numberOfCateringPlates = parseInt(cateringPlatesInput.value);
+
+
+    // Function to render calendar for a given month and year
+    function renderCalendar(year, month) {
+        calendarGrid.innerHTML = `
+            <div class="day-name">Sun</div>
+            <div class="day-name">Mon</div>
+            <div class="day-name">Tue</div>
+            <div class="day-name">Wed</div>
+            <div class="day-name">Thu</div>
+            <div class="day-name">Fri</div>
+            <div class="day-name">Sat</div>
+        `;
+
+        currentMonthYear.textContent = new Date(year, month).toLocaleString('en-US', { month: 'long', year: 'numeric' });
+
+        const firstDayOfMonth = new Date(year, month, 1);
+        const lastDayOfMonth = new Date(year, month + 1, 0);
+        const numDays = lastDayOfMonth.getDate();
+        const startDay = firstDayOfMonth.getDay(); // 0 for Sunday, 1 for Monday, etc.
+
+        // Add empty cells for days before the first day of the month
+        for (let i = 0; i < startDay; i++) {
+            const emptyCell = document.createElement('div');
+            emptyCell.classList.add('date-cell', 'empty');
+            calendarGrid.appendChild(emptyCell);
+        }
+
+        // Hardcoded availability for demonstration (you'd fetch this from a backend)
+        const venueAvailability = {
+            '2025-05-16': 'booked',
+            '2025-05-17': 'booked',
+            '2025-05-21': 'pending',
+            '2025-05-22': 'pending',
+            '2025-05-23': 'pending',
+            // Example for other months/years
+            '2025-06-05': 'booked',
+            '2025-07-10': 'pending',
+            '2026-01-01': 'booked'
+        };
+
+        for (let day = 1; day <= numDays; day++) {
+            const dateCell = document.createElement('div');
+            dateCell.classList.add('date-cell');
+            dateCell.textContent = day;
+
+            const fullDate = new Date(year, month, day);
+            const fullDateString = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+            const status = venueAvailability[fullDateString];
+
+            if (fullDate < today) {
+                dateCell.classList.add('past-date');
+            } else {
+                if (status) {
+                    dateCell.classList.add(status);
+                    if (status === 'booked' || status === 'empty') {
+                        dateCell.style.cursor = 'default';
+                    } else {
+                        dateCell.addEventListener('click', function() {
+                            const currentlySelected = calendarGrid.querySelector('.date-cell.selected');
+                            if (currentlySelected) {
+                                currentlySelected.classList.remove('selected');
+                            }
+                            dateCell.classList.add('selected');
+
+                            selectedBookingDate = new Date(year, month, day);
+                            displaySelectedDate.textContent = selectedBookingDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                            summaryDate.textContent = selectedBookingDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                            calculateTotal();
+                        });
+                    }
+                } else {
+                    dateCell.classList.add('available');
+                    dateCell.addEventListener('click', function() {
+                        const currentlySelected = calendarGrid.querySelector('.date-cell.selected');
+                        if (currentlySelected) {
+                            currentlySelected.classList.remove('selected');
+                        }
+                        dateCell.classList.add('selected');
+
+                        selectedBookingDate = new Date(year, month, day);
+                        displaySelectedDate.textContent = selectedBookingDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                        summaryDate.textContent = selectedBookingDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                        calculateTotal();
+                    });
+                }
+
+                // Pre-select May 31, 2025, if it's the current view and not in the past
+                const may31_2025 = new Date(2025, 4, 31);
+                if (year === 2025 && month === 4 && day === 31 && may31_2025 >= today) { // Month 4 is May
+                     dateCell.classList.add('selected');
+                     selectedBookingDate = new Date(year, month, day);
+                     displaySelectedDate.textContent = selectedBookingDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                     summaryDate.textContent = selectedBookingDate.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+                }
+            }
+
+            calendarGrid.appendChild(dateCell);
+        }
+    }
+
+    // Time Slot Selection Logic
+    timeSlotButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            timeSlotButtons.forEach(btn => btn.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedBookingTime = this.dataset.time;
+            summaryTime.textContent = selectedBookingTime;
+            calculateTotal();
+        });
+    });
+
+    // Set default selected time slot and update summary
+    const defaultTimeSlotButton = document.querySelector('.time-slot-button[data-time="Afternoon (12PM-4PM)"]');
+    if (defaultTimeSlotButton) {
+        defaultTimeSlotButton.click(); // Programmatically click to set initial state
+    }
+
+
+    // Event Type Selection Logic
+    eventTypeSelect.addEventListener('change', function() {
+        summaryEventType.textContent = this.value || 'Not selected';
+        calculateTotal();
+    });
+
+    // Number of Guests Input Logic
+    numGuestsInput.addEventListener('input', function() {
+        numberOfGuests = parseInt(this.value) || 0;
+        summaryGuests.textContent = numberOfGuests;
+        calculateTotal();
+    });
+
+    // Catering Plates Input Logic
+    cateringPlatesInput.addEventListener('input', function() {
+        numberOfCateringPlates = parseInt(this.value) || 0;
+        summaryCateringPlates.textContent = numberOfCateringPlates;
+        calculateTotal();
+    });
+
+
+    // Function to calculate total based on selected services and event details
+    function calculateTotal() {
+        let additionalServicesTotal = 0;
+        serviceCheckboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                const price = parseFloat(checkbox.dataset.servicePrice);
+                additionalServicesTotal += price;
+            }
+        });
+
+        const currentCateringCharges = CATERING_PER_PLATE_PRICE * numberOfCateringPlates;
+
+        const subtotal = VENUE_BASE_CHARGE + currentCateringCharges + additionalServicesTotal;
+        const gstAmount = subtotal * GST_RATE;
+        const finalTotal = subtotal + gstAmount;
+
+        venueChargesSpan.textContent = `₹${VENUE_BASE_CHARGE.toLocaleString('en-IN')}`;
+        cateringChargesSpan.textContent = `₹${currentCateringCharges.toLocaleString('en-IN')}`;
+        calculatedAdditionalServicesSpan.textContent = `₹${additionalServicesTotal.toLocaleString('en-IN')}`;
+        calculatedGSTSpan.textContent = `₹${gstAmount.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+        finalTotalSpan.textContent = `₹${finalTotal.toLocaleString('en-IN', { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
+    }
+
+    // Add event listeners to additional service checkboxes
+    serviceCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', calculateTotal);
+    });
+
+    // Navigation for calendar
+    prevMonthBtn.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+    });
+
+    nextMonthBtn.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+    });
+
+    // Initial render of the calendar for the current month
+    // Set current date to May 2025 to match the image on load
+    currentDate = new Date(2025, 4, 1); // Month is 0-indexed, so 4 is May
+    renderCalendar(currentDate.getFullYear(), currentDate.getMonth());
+
+    // Initial calculation on page load (important after setting defaults)
+    calculateTotal();
+
+    // Placeholder for Proceed to Payment button
+    document.querySelector('.proceed-button').addEventListener('click', function() {
+        // Basic validation
+        if (!selectedBookingDate) {
+            alert('Please select a date for your booking.');
+            return;
+        }
+        if (!selectedBookingTime) {
+            alert('Please select a time slot for your booking.');
+            return;
+        }
+        if (!eventTypeSelect.value) {
+            alert('Please select an Event Type.');
+            return;
+        }
+        if (numberOfGuests <= 0) {
+            alert('Number of Guests must be greater than 0.');
+            return;
+        }
+        if (numberOfCateringPlates < 0) {
+            alert('Catering plates cannot be negative.');
+            return;
+        }
+
+        alert(`Proceeding to payment for Royal Palace Function Hall on ${selectedBookingDate.toLocaleDateString()} at ${selectedBookingTime} for a ${eventTypeSelect.value} with ${numberOfGuests} guests and ${numberOfCateringPlates} catering plates. Total: ${finalTotalSpan.textContent}`);
+        // In a real application, you would collect all this data and send it to a backend for payment processing.
+    });
+});
+
+    </script>
+</body>
+</html>

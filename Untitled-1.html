@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BookVenueNow</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Header styles */
+    header {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .text {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .highlight {
+      color: #9500be;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+    }
+    nav ul li a:hover{
+      color: #7e00a0;
+    }
+    .buttons a {
+      margin-left: 15px;
+      padding: 8px 15px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .register {
+      background-color: #fff;
+      border: 2px solid #9500be;
+      color: #9500be;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .register:hover {
+      background-color: #9500be;
+      color: #ffffff;
+    }
+
+    
+    /* Banner styles */
+    .banner {
+      position: relative;
+      background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.7)), 
+        url("https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+      background-size: cover;
+      background-position: center;
+      color: white;
+      text-align: center;
+      padding: 100px 20px;
+      height: 50vh;
+    }
+
+    .banner h1 {
+      font-size: 48px;
+      margin: 0;
+    }
+
+    .banner p {
+      font-size: 20px;
+      margin: 10px 0 30px;
+    }
+
+    /* Updated Search Bar styles */
+    .search-bar {
+      background: white;
+      padding: 20px;
+      width: 75vw;
+      border-radius: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-left: 100px;
+    }
+
+    .search-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      text-align: center;
+      
+    }
+
+    .search-item h1 {
+      font-size: 13px;
+      color: #000000c4;
+      margin-bottom: 5px;
+    }
+
+    .search-item select,
+    .search-item input {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 90%;
+    }
+
+    .search-bar button {
+      background-color: #9500be;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      align-self: center;
+      margin-top: 19px;
+    }
+
+    .search-bar button:hover {
+      background-color: #750095ed;
+    }
+
+    /* Section title styles */
+    .section-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 30px 20px 20px;
+    }
+
+    .section-title h2 {
+      font-size: 28px;
+      color: #333;
+    }
+
+    .view-all {
+      font-size: 14px;
+      color: #800080;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    /* Venue container styles */
+    .venue-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin: 0 20px;
+    }
+
+    .venue-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: calc(33.333% - 20px);
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 20px;
+    }
+
+    .venue-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .venue-details {
+      padding: 15px;
+      flex: 1;
+    }
+
+    .venue-name {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .venue-price {
+      font-size: 16px;
+      color: #800080;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    .venue-description {
+      font-size: 14px;
+      color: #666;
+      margin: 10px 0;
+    }
+
+    .amenities {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .amenity {
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-size: 12px;
+      color: #555;
+    }
+
+    .availability {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 10px 0;
+      font-size: 14px;
+      color: green;
+    }
+
+    .details-button {
+      background-color: #800080;
+      color: white;
+      text-align: center;
+      padding: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: auto;
+      transition: background-color 0.3s;
+    }
+
+    .details-button:hover {
+      background-color: #4A148C;
+    }
+
+    /*how it works*/
+    .how-it-works {
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .how-it-works h2 {
+      font-size: 32px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .how-it-works p {
+      font-size: 18px;
+      color: #555;
+      margin-bottom: 50px;
+    }
+
+    .steps-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .step-card {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 300px;
+      text-align: center;
+    }
+
+    .step-card .icon {
+      background-color: #800080;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      margin: 0 auto 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 24px;
+    }
+
+    .step-card h3 {
+      font-size: 20px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .step-card p {
+      font-size: 16px;
+      color: #666;
+      margin: 0;
+    }
+
+
+    .additional-services {
+    text-align: center;
+    padding: 50px 20px;
+  }
+
+  .additional-services h2 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .additional-services p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 50px;
+  }
+
+  .services-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 5px;
+    padding: 0 20px;
+  }
+
+  .service-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    height: 60vh;
+    width: 280px;
+    margin: 8px;
+  }
+
+  .service-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-card-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-card h3 {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-card p {
+    font-size: 14px;
+    color: #666;
+    text-align: left;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-card .price {
+    font-size: 14px;
+    color: #800080;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: start ;
+    flex-direction: row;
+    gap: 40px;
+  }
+
+  .service-card a {
+    color: #800080;
+    text-decoration: none;
+    font-size: 14px;
+  }
+
+
+
+  .testimonials {
+    text-align: center;
+    padding: 50px 20px;
+    background-color: #ffffff;
+  }
+
+  .testimonials h2 {
+    font-size: 32px;
+    color: #333;
+    margin-bottom: 10px;
+  }
+
+  .testimonials p {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 40px;
+  }
+
+  .testimonials-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 0 20px;
+  }
+
+  .testimonial-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    max-width: 300px;
+    flex: 1 1 calc(33.33% - 40px);
+    margin: 10px;
+    display: flex;
+    flex-direction: column;
+    
+  }
+
+  .stars {
+    color: #ffa500;
+    font-size: 27px;
+    margin-bottom: 3px;
+    text-align: start;
+    margin-left: 10px;
+  }
+
+  .testimonial-text {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+
+  .customer-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .customer-info img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+  }
+
+  .customer-info div {
+    text-align: left;
+  }
+
+  .customer-info strong {
+    font-size: 16px;
+    color: #333;
+  }
+
+  .customer-info p {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+  }
+
+  .footer {
+    background-color: #1a202c;
+    color: #e2e8f0;
+    padding: 40px 20px;
+  }
+
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-section {
+    flex: 1 1 calc(25% - 20px);
+    min-width: 200px;
+  }
+
+  .footer-logo {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .footer-logo span {
+    color: #ffa500;
+  }
+
+  .footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .footer-section p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-section ul li {
+    margin-bottom: 8px;
+  }
+
+  .footer-section ul li a {
+    text-decoration: none;
+    color: #e2e8f0;
+    font-size: 14px;
+  }
+
+  .footer-section ul li a:hover {
+    text-decoration: underline;
+    color: rgb(255, 166, 0);
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .social-icons a {
+    color: #e2e8f0;
+    font-size: 17px;
+    text-decoration: none;
+  }
+
+  .social-icons a:hover {
+    color: #ffa500;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #2d3748;
+    padding-top: 10px;
+    font-size: 14px;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    color: #718096;
+  }
+
+  .footer-section p i {
+    margin-right: 8px;
+  }
+  </style>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <div class="icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="#FFD700"></rect>
+          <line x1="16" y1="2" x2="16" y2="6" stroke="#800080"></line>
+          <line x1="8" y1="2" x2="8" y2="6" stroke="#800080"></line>
+          <line x1="3" y1="10" x2="21" y2="10" stroke="#4A148C"></line>
+        </svg>
+      </div>
+      <div class="text">
+        <span class="highlight">BookVenueNow</span>
+      </div>
+    </div>
+
+    <nav>
+      <ul>
+        <li><a href="pra.html">Home</a></li>
+        <li><a href="#">Venues</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="buttons">
+      <a href="Registerwithlogin.html" class="register">
+        <i class="fa fa-user-plus"></i> Register Your Venue
+      </a>
+    </div>
+  </header>
+
+  <!-- Banner -->
+  <div class="banner">
+    <h1>Find Your Perfect Venue</h1>
+    <p style="font-size: 25px;">Book exclusive function halls for weddings, parties, corporate events, and <br>more.</p>
+    <div class="search-bar">
+      <div class="search-item">
+        <h1><i class="fas fa-map-marker-alt"></i> Location</h1>
+        <select>
+          <option>Any Location</option>
+          <option>Hyderabad</option>
+          <option>Mumbai</option>
+          <option>Delhi</option>
+          <option>Chennai</option>
+        </select>
+      </div>
+      <div class="search-item">
+        <h1><i class="far fa-calendar-alt"></i> Event Date</h1>
+        <input type="date" placeholder="Event Date">
+      </div>
+      <div class="search-item">
+        <h1><i class="fas fa-users"></i> Guests</h1>
+        <select>
+          <option>Any Size</option>
+          <option>1-50 Guests</option>
+          <option>50-100 Guests</option>
+          <option>100-200 Guests</option>
+          <option>200-500 Guests</option>
+          <option>500+ Guests</option>
+        </select>
+      </div>
+      <button style="margin-top:19px;">Search</button>
+    </div>
+  </div>
+
+  <!-- Featured Venues Section -->
+  <div class="section-title">
+    <h2>Featured Venues</h2>
+    <a href="#" class="view-all">View All →</a>
+  </div>
+
+  <div class="venue-container">
+    <!-- Card 1 -->
+    <div class="venue-card">
+      <img src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Royal Palace Function Hall">
+      <div class="venue-details">
+        <div class="venue-name">Royal Palace Function Hall</div>
+        <div class="venue-price">₹32,000</div>
+        <div class="venue-description">Luxurious venue perfect for weddings and grand celebrations with elegant decor and world-class amenities.</div>
+        <div class="amenities">
+          <span class="amenity">Parking</span>
+          <span class="amenity">Sound System</span>
+          <span class="amenity">Dressing Room</span>
+          <span class="amenity">Catering</span>
+        </div>
+        <div class="availability">✔ Available Today</div>
+        <a href="venue1.html"><button class="details-button">View Details</button></a>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="venue-card">
+      <img src="https://images.ctfassets.net/f03p2kuux1j7/1T30sg4QpzHuBtoPB0irev/f63167af81feec9c8f0b2196d3bf7cd7/4930.jpg" alt="Green Valley Convention">
+      <div class="venue-details">
+        <div class="venue-name">Green Valley Convention</div>
+        <div class="venue-price">₹41,000</div>
+        <div class="venue-description">Modern convention center ideal for corporate events, conferences, and large gatherings with state-of-the-art facilities.</div>
+        <div class="amenities">
+          <span class="amenity">Sound System</span>
+          <span class="amenity">Dance Floor</span>
+          <span class="amenity">Projector</span>
+          <span class="amenity">Stage</span>
+        </div>
+        <div class="availability">✔ Available Today</div>
+        <button class="details-button">View Details</button>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="venue-card">
+      <img src="https://images.venuebookingz.com/28097-1683528401-wm-milan-function-hall-dharwad-1.jpg" alt="Golden Tulip Banquet">
+      <div class="venue-details">
+        <div class="venue-name">Golden Tulip Banquet</div>
+        <div class="venue-price">₹48,000</div>
+        <div class="venue-description">Elegant banquet hall with traditional decor, perfect for weddings, receptions, and cultural celebrations.</div>
+        <div class="amenities">
+          <span class="amenity">Sound System</span>
+          <span class="amenity">Catering</span>
+          <span class="amenity">Dance Floor</span>
+          <span class="amenity">Projector</span>
+        </div>
+        <div class="availability">✔ Available Today</div>
+        <button class="details-button">View Details</button>
+      </div>
+    </div>
+  </div>
+
+
+  <section class="how-it-works">
+    <h2>How It Works</h2>
+    <p>Book your perfect venue in just a few simple steps. Our platform makes it easy to find, compare, and secure your ideal function hall.</p>
+    <div class="steps-container">
+      <div class="step-card">
+        <div class="icon">1</div>
+        <h3>Find a Venue</h3>
+        <p>Browse through our extensive collection of venues and use filters to find the perfect match for your event.</p>
+      </div>
+      <div class="step-card">
+        <div class="icon">2</div>
+        <h3>Check Availability</h3>
+        <p>View real-time availability and select your preferred date and time slot for the event.</p>
+      </div>
+      <div class="step-card">
+        <div class="icon">3</div>
+        <h3>Book & Confirm</h3>
+        <p>Make your booking, add any additional services you need, and secure your venue with online payment.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="additional-services">
+    <h2>Additional Services</h2>
+    <p>Enhance your event with our premium services. We offer everything you need to make your special day perfect.</p>
+    <div class="services-container">
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Decoration">
+        <div class="service-card-content">
+          <h3>Decoration</h3>
+          <p>Transform your venue with our elegant decoration services including floral arrangements.</p>
+          <div class="price">Starting at ₹15,000
+          <a href="#">Learn More</a>
+        </div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Catering">
+        <div class="service-card-content">
+          <h3>Catering</h3>
+          <p>Delight your guests with exquisite menus featuring multi-cuisine options, customized to your taste.</p>
+          <div class="price1" style="font-size: 14px;
+          color: #800080;
+          margin-bottom: 10px;
+          display: flex;
+          justify-content: start ;
+          flex-direction: row; 
+          gap: 30px;">From ₹550 per plate
+          <a href="#">Learn More</a>
+        </div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Photography & Videography">
+        <div class="service-card-content">
+          <h3>Photography & Videography</h3>
+          <p>Capture your special moments with our professional photography and videography services.</p>
+          <div class="price">Starting at ₹25,000
+          <a href="#">Learn More</a>
+        </div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1429962714451-bb934ecdc4ec?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="DJ & Sound System">
+        <div class="service-card-content">
+          <h3>DJ & Sound System</h3>
+          <p>Set the perfect mood with our premium sound systems, DJs, and live entertainment options.</p>
+          <div class="price">Starting at ₹8,000
+          <a href="#">Learn More</a>
+        </div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Floral Arrangement">
+        <div class="service-card-content">
+          <h3>Floral Arrangement</h3>
+          <p>Create a stunning atmosphere with our custom floral arrangements perfect for any occasion.</p>
+          <div class="price">Starting at ₹12,000
+          <a href="#">Learn More</a>
+        </div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Live Band Performance">
+        <div class="service-card-content">
+          <h3>Live Band Performance</h3>
+          <p>Elevate your event with our professional live band performing your favorite music.</p>
+          <div class="price">Starting at ₹20,000
+          <a href="#">Learn More</a>
+        </div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Wedding Cake Design">
+        <div class="service-card-content">
+          <h3>Wedding Cake Design</h3>
+          <p>Make your celebration special with our custom-designed cakes for all occasions.</p>
+          <div class="price">Starting at ₹5,000
+          <a href="#">Learn More</a>
+        </div>
+        </div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Lighting Setup">
+        <div class="service-card-content">
+          <h3>Lighting Setup</h3>
+          <p>Enhance the ambiance with our professional lighting services, from subtle to spectacular.</p>
+          <div class="price">Starting at ₹10,000
+          <a href="#">Learn More</a>
+        </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials">
+    <h2>What Our Customers Say</h2>
+    <p>Hear from our satisfied customers about their experience with our venues and services.</p>
+    <div class="testimonials-container">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"We had our wedding reception at Royal Palace, and it was absolutely magical! The venue was stunning, the staff was attentive, and everything went smoothly. The decoration service they provided was beyond our expectations."</p>
+        <div class="customer-info">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Priya Sharma">
+          <div>
+            <strong>Priya Sharma</strong>
+            <p>Wedding Reception, June 2023</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Green Valley Convention was the perfect venue for our corporate event. The booking process was seamless, and the hall was equipped with all the necessary technology. The catering service was outstanding, and our clients were impressed."</p>
+        <div class="customer-info">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Rajesh Mehta">
+          <div>
+            <strong>Rajesh Mehta</strong>
+            <p>Corporate Event, August 2023</p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"We celebrated our 25th anniversary at Golden Tulip Banquet, and it was a night to remember! The hall was beautifully decorated, and the staff went above and beyond to accommodate our requests. The photography service captured every special moment."</p>
+        <div class="customer-info">
+          <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-1.2.1&auto=format&fit=crop&w=100&q=80" alt="Anita & Suresh Patel">
+          <div>
+            <strong>Anita & Suresh Patel</strong>
+            <p>Anniversary, September 2023</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h2 class="footer-logo">BookVenueNow</h2>
+        <p>Find the perfect function hall for your special events. Easy booking, real-time availability, and premium services.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Browse Venues</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Customer Support</h3>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Payment Options</a></li>
+          <li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Hyderabad, Telangana, India - 500001</p>
+        <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+        <p><i class="fas fa-envelope"></i> info@bookvenuenow.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 BookVenueNow. All rights reserved.</p>
+    </div>
+  </footer>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const registerVenueButton = document.querySelector('.buttons .register');
+
+    function checkUserLoggedIn() {
+        return document.cookie.includes('user_session_id');
+    }
+});
+  </script>
+</body>
+</html>

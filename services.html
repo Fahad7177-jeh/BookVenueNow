@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Document</title>
+</head>
+<style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /* Header styles */
+    header {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .icon {
+      width: 40px;
+      height: 40px;
+    }
+
+    .text {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .highlight {
+      color: #9500be;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      margin: 0;
+      padding: 0;
+    }
+
+    nav ul li {
+      margin-left: 20px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #000;
+      font-weight: 500;
+    }
+    nav ul li a:hover{
+      color: #7e00a0;
+    }
+    .buttons a {
+      margin-left: 15px;
+      padding: 8px 15px;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 5px;
+    }
+
+    .register {
+      background-color: #fff;
+      border: 2px solid #9500be;
+      color: #9500be;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .register:hover {
+      background-color: #9500be;
+      color: #ffffff;
+    }
+
+    .login {
+      background-color: #ffffff;
+      border: 2px solid #9500be;
+      color: #9500be;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .login:hover {
+      background-color: #9500be;
+      color: #ffffff;
+    }
+
+    .signup {
+      background-color: #9500be;
+      border: 2px solid #9500be;
+      color: #ffffff;
+      padding: 8px 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    .signup:hover{
+      background-color: #750095ed;
+    }
+
+
+    .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        .services-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .services-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: #222;
+        }
+        
+        .services-header p {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .search-filter {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+            margin-right: 20px;
+            display: inline-block;
+        }
+        
+      .search-box input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            font-size: 1rem;
+            padding-left: 45px;
+        }
+        
+
+      .search-box i {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #999;
+      }
+
+        .filter-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 10px 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background-color: #9500be;
+            color: white;
+            border-color: #9500be;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-img {
+            height: 200px;
+            background-color: #eee;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: #222;
+        }
+        
+        .service-content p {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .price {
+            font-weight: bold;
+            color: #9500be;
+            margin-bottom: 15px;
+            display: block;
+            font-size: 1.1rem;
+        }
+        
+        .view-details {
+            display: inline-block;
+            padding: 8px 20px;
+            background-color: #9500be;
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .view-details:hover {
+            background-color: #750095ed;
+        }
+        
+        .no-results {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .search-filter {
+                flex-direction: column;
+            }
+            
+            .search-box {
+                max-width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        
+  .footer {
+    background-color: #1a202c;
+    color: #e2e8f0;
+    padding: 40px 20px;
+  }
+
+  .footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+  }
+
+  .footer-section {
+    flex: 1 1 calc(25% - 20px);
+    min-width: 200px;
+  }
+
+  .footer-logo {
+    font-size: 24px;
+    color: #ffffff;
+    margin-bottom: 10px;
+  }
+
+  .footer-logo span {
+    color: #ffa500;
+  }
+
+  .footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+
+  .footer-section p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    line-height: 1.6;
+  }
+
+  .footer-section ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer-section ul li {
+    margin-bottom: 8px;
+  }
+
+  .footer-section ul li a {
+    text-decoration: none;
+    color: #e2e8f0;
+    font-size: 14px;
+  }
+
+  .footer-section ul li a:hover {
+    text-decoration: underline;
+    color: rgb(255, 166, 0);
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 10px;
+  }
+
+  .social-icons a {
+    color: #e2e8f0;
+    font-size: 17px;
+    text-decoration: none;
+  }
+
+  .social-icons a:hover {
+    color: #ffa500;
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+    border-top: 1px solid #2d3748;
+    padding-top: 10px;
+    font-size: 14px;
+  }
+
+  .footer-bottom p {
+    margin: 0;
+    color: #718096;
+  }
+
+  .footer-section p i {
+    margin-right: 8px;
+  }
+</style>
+<body>
+    <header>
+        <div class="logo">
+          <div class="icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar">
+              <rect x="3" y="4" width="18" height="18" rx="2" ry="2" fill="#FFD700"></rect>
+              <line x1="16" y1="2" x2="16" y2="6" stroke="#800080"></line>
+              <line x1="8" y1="2" x2="8" y2="6" stroke="#800080"></line>
+              <line x1="3" y1="10" x2="21" y2="10" stroke="#4A148C"></line>
+            </svg>
+          </div>
+          <div class="text">
+            <span class="highlight">BookVenueNow</span>
+          </div>
+        </div>
+    
+        <nav>
+          <ul>
+            <li><a href="pra.html">Home</a></li>
+            <li><a href="#">Venues</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </nav>
+    
+        <div class="buttons">
+          <a href="#" class="register">
+            <i class="fa fa-user-plus"></i> Register Your Venue
+          </a>
+        </div>
+      </header>
+      <div class="services-container">
+        <div class="services-header">
+            <h1>Our Services</h1>
+            <p>Enhance your event with our premium services. From decorations to photography, we offer everything you need to make your special day perfect.</p>
+        </div>
+        
+        <div class="search-filter">
+          <div class="search-box">
+            <input type="text" id="serviceSearch" placeholder="Search services...">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-filter="all">All Services</button>
+                <button class="filter-btn" data-filter="decoration">Decoration</button>
+                <button class="filter-btn" data-filter="catering">Catering</button>
+                <button class="filter-btn" data-filter="photography">Photography</button>
+                <button class="filter-btn" data-filter="entertainment">Entertainment</button>
+            </div>
+        </div>
+        
+        <div class="services-grid" id="servicesGrid">
+            <!-- Service Card 1 -->
+            <div class="service-card" data-category="decoration">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="service-content">
+                    <h3>Decoration</h3>
+                    <p>Transforms your venue with our elegant decoration services including floral arrangements, themed decor, and lighting.</p>
+                    <span class="price">Starting at ₹15,000</span>
+                    <a href="#" class="view-details">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Service Card 2 -->
+            <div class="service-card" data-category="catering">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
+                <div class="service-content">
+                    <h3>Catering</h3>
+                    <p>Delight your guests with exquisite menus featuring multi-cuisine options, customized to your preferences.</p>
+                    <span class="price">From ₹550 per plate</span>
+                    <a href="#" class="view-details">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Service Card 3 -->
+            <div class="service-card" data-category="photography">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1542038784456-1ea8e935640e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="service-content">
+                    <h3>Photography & Videography</h3>
+                    <p>Capture your special moments with our professional photography and videography services.</p>
+                    <span class="price">Starting at ₹35,000</span>
+                    <a href="#" class="view-details">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Service Card 4 -->
+            <div class="service-card" data-category="entertainment">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1470229722913-7c0e2dbbafd3?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
+                <div class="service-content">
+                    <h3>DJ & Sound System</h3>
+                    <p>Set the perfect mood with our premium sound systems. DJ's and live entertainment options.</p>
+                    <span class="price">Starting at ₹8,000</span>
+                    <a href="#" class="view-details">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Service Card 5 -->
+            <div class="service-card" data-category="decoration">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="service-content">
+                    <h3>Floral Arrangement</h3>
+                    <p>Create a stunning atmosphere with our custom floral arrangements perfect for any occasion.</p>
+                    <span class="price">Starting at ₹12,000</span>
+                    <a href="#" class="view-details">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Service Card 6 -->
+            <div class="service-card" data-category="entertainment">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1470225620780-dba8ba36b745?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
+                <div class="service-content">
+                    <h3>Live Band Performance</h3>
+                    <p>Elevate your event with our professional live band performing your favorite music.</p>
+                    <span class="price">Starting at ₹20,000</span>
+                    <a href="#" class="view-details">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Service Card 7 -->
+            <div class="service-card" data-category="catering">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');"></div>
+                <div class="service-content">
+                    <h3>Wedding Cake Design</h3>
+                    <p>Make your celebration special with our custom designed cakes for all occasions.</p>
+                    <span class="price">Starting at ₹5,000</span>
+                    <a href="#" class="view-details">View Details</a>
+                </div>
+            </div>
+            
+            <!-- Service Card 8 -->
+            <div class="service-card" data-category="decoration">
+                <div class="service-img" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');"></div>
+                <div class="service-content">
+                    <h3>Lighting Setup</h3>
+                    <p>Enhance the ambience with our professional lighting services; from subtle to spectacular.</p>
+                    <span class="price">Starting at ₹10,000</span>
+                    <a href="#" class="view-details">View Details</a>
+                </div>
+            </div>
+        </div>
+    </div>
+<footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h2 class="footer-logo">BookVenueNow</h2>
+        <p>Find the perfect function hall for your special events. Easy booking, real-time availability, and premium services.</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook-f"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Browse Venues</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Customer Support</h3>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Payment Options</a></li>
+          <li><a href="#">Refund Policy</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Hyderabad, Telangana, India - 500001</p>
+        <p><i class="fas fa-phone-alt"></i> +91 98765 43210</p>
+        <p><i class="fas fa-envelope"></i> info@bookvenuenow.com</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 BookVenueNow. All rights reserved.</p>
+    </div>
+  </footer>
+  
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('serviceSearch');
+            const filterButtons = document.querySelectorAll('.filter-btn');
+            const serviceCards = document.querySelectorAll('.service-card');
+            const servicesGrid = document.getElementById('servicesGrid');
+            
+            // Filter by category
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    button.classList.add('active');
+                    
+                    const filterValue = button.getAttribute('data-filter');
+                    filterServices(filterValue);
+                });
+            });
+            
+            // Search functionality
+            searchInput.addEventListener('input', () => {
+                const searchTerm = searchInput.value.toLowerCase();
+                const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+                
+                filterServices(activeFilter, searchTerm);
+            });
+            
+            function filterServices(category, searchTerm = '') {
+                let hasResults = false;
+                
+                serviceCards.forEach(card => {
+                    const cardCategory = card.getAttribute('data-category');
+                    const cardTitle = card.querySelector('h3').textContent.toLowerCase();
+                    const cardText = card.querySelector('p').textContent.toLowerCase();
+                    
+                    // Check if card matches category filter
+                    const categoryMatch = category === 'all' || cardCategory === category;
+                    
+                    // Check if card matches search term
+                    const searchMatch = searchTerm === '' || 
+                                      cardTitle.includes(searchTerm) || 
+                                      cardText.includes(searchTerm);
+                    
+                    if (categoryMatch && searchMatch) {
+                        card.style.display = 'block';
+                        hasResults = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Show "no results" message if no cards match
+                const noResultsMessage = document.querySelector('.no-results');
+                if (!hasResults) {
+                    if (!noResultsMessage) {
+                        const message = document.createElement('div');
+                        message.className = 'no-results';
+                        message.textContent = 'No services found matching your criteria.';
+                        servicesGrid.appendChild(message);
+                    }
+                } else if (noResultsMessage) {
+                    noResultsMessage.remove();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
